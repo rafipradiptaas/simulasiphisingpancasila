@@ -16,6 +16,12 @@ export async function POST(req: Request) {
       });
     }
 
+    if (!password.length) {
+      return NextResponse.json({ ok: false, error: "Password kosong." }, {
+        status: 400,
+      });
+    }
+
     await prisma.credentialSubmission.create({
       data: { username, password },
     });
